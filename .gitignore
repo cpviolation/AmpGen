@@ -16,5 +16,13 @@
 !examples/**
 !.ci/
 !.ci/**
+!README.md
+!README.tex.md
+!Standalone.cmake
+!CMakeLists.txt
+!.travis.yml
+!.gitmodules
+!LICENSE
+!CONTRIBUTING.md
 
 
