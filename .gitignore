@@ -14,5 +14,7 @@
 !options/**
 !examples/
 !examples/**
+!.ci/
+!.ci/**
 
 
