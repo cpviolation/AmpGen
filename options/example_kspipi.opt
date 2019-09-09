@@ -7,7 +7,10 @@ EventType D0 K0S0 pi+ pi-
 # Flag to interpret complex numbers are (amp,phase) rather than real/imaginary, and angles in deg rather than rad.
 CouplingConstant::Coordinates  polar
 CouplingConstant::AngularUnits deg 
+<<<<<<< HEAD
 nEvents 10000
+=======
+>>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
 
 # Import K-matrix parameters 
 Import $AMPGENROOT/options/kMatrix.opt

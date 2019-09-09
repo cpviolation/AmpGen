@@ -1,4 +1,5 @@
 # Description of CF amplitude D0 -> K-,pi+,pi+,pi-
+<<<<<<< HEAD
 
 
 
@@ -6,6 +7,11 @@ EventType D0 K- pi+ pi+ pi-
 Import $AMPGENROOT/options/kMatrix.opt
 
 
+=======
+EventType D0 K- pi+ pi+ pi-
+Import $AMPGENROOT/options/kMatrix.opt
+
+>>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
 a(1)(1260)-::Spline      40         0.18412         1.9
 a(1)(1260)+::Spline      40         0.18412         1.9
 K(1460)+::Spline         40         0.6             3.0 
