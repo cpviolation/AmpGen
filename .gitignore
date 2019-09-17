@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 *
 !.gitignore
 !AmpGen/
@@ -27,7 +26,7 @@
 !CONTRIBUTING.md
 
 
-=======
-/*build*/
-/AmpGen/Version.h
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
+
+
+
+

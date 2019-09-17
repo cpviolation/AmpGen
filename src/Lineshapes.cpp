@@ -144,14 +144,11 @@ Expression AmpGen::pol( const Expression& X, const std::vector<Expression>& p )
   for ( auto& ip : p ) {
     F = F + ip * L;
     L = L * X;
-<<<<<<< HEAD
 /*     std::cout<<"F = "<<F<<"\n";
     std::cout<<"ip = "<<ip<<"\n";
     std::cout<<"X = "<<X<<"\n";
     std::cout<<"L = "<<L<<"\n";
     */
-=======
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
   }
   return F;
 }

@@ -1,13 +1,7 @@
 #include "AmpGen/Integrator.h"
-<<<<<<< HEAD
 #include <iostream>
 using namespace AmpGen;
 using namespace std;
-=======
-
-using namespace AmpGen;
-
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
 Bilinears::Bilinears(const size_t& r, const size_t& c) : 
   rows(r), 
   cols(c), 
@@ -25,15 +19,11 @@ void Bilinears::resetCalculateFlags()
 } 
 complex_t& Bilinears::operator()( const size_t& x, const size_t& y ){ return norms[x*cols+y];}
 bool   Bilinears::isZero( const size_t& x, const size_t& y ){ return markAsZero[ x*cols+y] ; } 
-<<<<<<< HEAD
 bool Bilinears::workToDo( const size_t& x, const size_t& y ) const { 
   DEBUG("x = "<<x<<"\ny = "<<y<<"\ncols = "<<cols<<"\ncalculate size = "<<calculate.size());
   DEBUG("Calculate entry = "<<calculate[x * cols + y]);
   return calculate[x*cols+y] ; 
   } // && ! markAsZero[x*cols+y] ; }
-=======
-bool Bilinears::workToDo( const size_t& x, const size_t& y ) const { return calculate[x*cols+y] ; } // && ! markAsZero[x*cols+y] ; }
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
 void   Bilinears::resize( const size_t& r, const size_t& c)
 {
   rows = r;

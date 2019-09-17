@@ -7,11 +7,7 @@
 #include "TFile.h"
 #include "TRandom3.h"
 #include "TTree.h"
-<<<<<<< HEAD
 #include "TGraph2D.h"
-=======
-
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
 #ifdef _OPENMP
 #include <omp.h>
 #include <thread>
@@ -97,15 +93,11 @@ int main( int argc, char** argv )
   MPS.loadFromStream();
   
   Particle p;
-<<<<<<< HEAD
   bool debug=false;
-=======
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
   
   EventType eventType( NamedParameter<std::string>( "EventType" , "", "EventType to generate, in the format: \033[3m parent daughter1 daughter2 ... \033[0m" ).getVector(),
                        NamedParameter<bool>( "GenerateTimeDependent", false , "Flag to include possible time dependence of the amplitude") );
 
-<<<<<<< HEAD
 
 //  EventType eventType2( NamedParameter<std::string>( "EventType2" , "", "EventType to generate second lot of events, in the format: \033[3m parent daughter1 daughter2 ... \033[0m" ).getVector(),
 //                       NamedParameter<bool>( "GenerateTimeDependent", false , "Flag to include possible time dependence of the amplitude") );
@@ -161,17 +153,6 @@ int main( int argc, char** argv )
         grAbs->SetPoint(i,x,y,sqrt(std::norm(z)));
         grArg->SetPoint(i,x,y,std::arg(z));
     }
-=======
-  INFO("Generating time-dependence? " << eventType.isTimeDependent() );
-  EventList accepted( eventType );
-
-  INFO("Generating events with type = " << eventType );
-
-  if ( gen_type == "CoherentSum" ) {
-    CoherentSum sig( eventType, MPS );
-    PhaseSpace phsp(eventType,&rand);
-    GenerateEvents( accepted, sig, phsp , nEvents, blockSize, &rand );
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
   } 
   else if ( gen_type == "PolarisedSum" ){
     PolarisedSum sig( eventType, MPS ); 
@@ -197,11 +178,8 @@ int main( int argc, char** argv )
   }
   if( accepted.size() == 0 ) return -1;
   TFile* f = TFile::Open( outfile.c_str(), "RECREATE" );
-<<<<<<< HEAD
   grArg->Write("gArg");
   grAbs->Write("gAbs");
-=======
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
   accepted.tree( "DalitzEventList" )->Write();
   auto plots = accepted.makeDefaultProjections(Bins(nBins), LineColor(kBlack));
   for ( auto& plot : plots ) plot->Write();
@@ -213,10 +191,6 @@ int main( int argc, char** argv )
       }
     }
   } 
-<<<<<<< HEAD
-
-=======
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
   INFO( "Writing output file " );
 
   f->Close();

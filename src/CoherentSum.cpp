@@ -178,10 +178,7 @@ void CoherentSum::generateSourceCode(const std::string& fname, const double& nor
   stream << "#include <math.h>\n";
   if ( add_mt ) stream << "#include <thread>\n";
   bool includePythonBindings = NamedParameter<bool>("CoherentSum::IncludePythonBindings",false);
-<<<<<<< HEAD
   if (includePythonBindings) INFO("Including Python bindings");
-=======
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
 
   for ( auto& p : m_matrixElements ){
     stream << p.amp << std::endl;

@@ -51,7 +51,7 @@ class CorrelatedSum{
         void setMC(EventList& list1, EventList& list2);
 
         void updateNorms(const std::vector<unsigned int>& iA, const std::vector<unsigned int>& iB,
-                                        const std::vector<unsigned int>& iC, const std::vector<unsigned int>& iD);
+                         const std::vector<unsigned int>& iC, const std::vector<unsigned int>& iD);
         void debugNorm();
 
         complex_t getVal(const Event& event1, const Event& event2) const;
