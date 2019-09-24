@@ -126,7 +126,7 @@ int main( int argc, char** argv )
     TGraph2D * grArg = new TGraph2D((int)nEvents);
     std::vector<size_t> i1 = {0,1};
     std::vector<size_t> i2 = {0,2};
-  if ( gen_type == "CoherentSum" ) {
+  if ( genType == generatorType::CoherentSum ) {
     CoherentSum sig( eventType, MPS );
 //    CoherentSum sig2( eventType2, MPS );
 //    CoherentSum sigF = sig + sig2;
