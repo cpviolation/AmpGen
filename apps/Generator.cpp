@@ -26,8 +26,11 @@
 #include "AmpGen/NamedParameter.h"
 #include "AmpGen/PolarisedSum.h"
 #include "AmpGen/OptionsParser.h"
+#include "AmpGen/enum.h"
 
 using namespace AmpGen;
+
+namespace AmpGen { make_enum(generatorType, CoherentSum, PolarisedSum, FixedLib, RGenerator) }
 
 struct FixedLibPDF {
   void* lib;
@@ -60,6 +63,7 @@ template <class PDF_TYPE, class PRIOR_TYPE>
   signalGenerator.fillEventList( pdf, events, nEvents );
 }
 
+
 int main( int argc, char** argv )
 {
   OptionsParser::setArgs( argc, argv );
@@ -67,9 +71,8 @@ int main( int argc, char** argv )
   size_t nEvents      = NamedParameter<size_t>     ("nEvents"  , 1, "Total number of events to generate" );
   size_t blockSize    = NamedParameter<size_t>     ("BlockSize", 100000, "Number of events to generate per block" );
   int seed            = NamedParameter<int>        ("Seed"     , 0, "Random seed used in event Generation" );
-  std::string outfile = NamedParameter<std::string>("Output"   , "Generate_Output.root" , "Name of output file" );
-  
-  std::string gen_type = NamedParameter<std::string>( "Type", "CoherentSum", optionalHelpString("Generator configuration to use:", 
+  std::string outfile = NamedParameter<std::string>("Output"   , "Generate_Output.root" , "Name of output file" ); 
+  auto genType        = NamedParameter<generatorType>( "Type", generatorType::CoherentSum, optionalHelpString("Generator configuration to use:", 
     { {"CoherentSum", "Full phase-space generator with (pseudo)scalar amplitude"}
     , {"PolarisedSum", "Full phase-space generator with particles carrying spin in the initial/final states"}
     , {"FixedLib", "Full phase-space generator with an amplitude from a precompiled library"}
@@ -154,18 +157,18 @@ int main( int argc, char** argv )
         grArg->SetPoint(i,x,y,std::arg(z));
     }
   } 
-  else if ( gen_type == "PolarisedSum" ){
+  else if ( genType == generatorType::PolarisedSum ){
     PolarisedSum sig( eventType, MPS ); 
     RecursivePhaseSpace phsp( sig.matrixElements()[0].decayTree.quasiStableTree() , eventType, &rand );
     GenerateEvents( accepted, sig, phsp, nEvents, blockSize, &rand );
   }
-  else if ( gen_type == "RGenerator" ) {
+  else if ( genType == generatorType::RGenerator ) {
     CoherentSum sig( eventType, MPS, "" );
     Generator<RecursivePhaseSpace> signalGenerator( sig[0].decayTree.quasiStableTree(), eventType );
     signalGenerator.setRandom( &rand );
     signalGenerator.fillEventList( sig, accepted, nEvents );
   }
-  else if ( gen_type == "FixedLib" ) {
+  else if ( genType == generatorType::FixedLib ) {
     Generator<> signalGenerator( eventType );
     signalGenerator.setRandom( &rand );
     signalGenerator.setBlockSize( blockSize );
@@ -174,7 +177,7 @@ int main( int argc, char** argv )
     signalGenerator.fillEventList( pdf, accepted, nEvents );
   } 
   else {
-    ERROR("Did not recognise configuration: " << gen_type );
+    FATAL("Did not recognise configuration: " << genType );
   }
   if( accepted.size() == 0 ) return -1;
   TFile* f = TFile::Open( outfile.c_str(), "RECREATE" );

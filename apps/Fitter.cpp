@@ -170,13 +170,6 @@ int main( int argc, char* argv[] )
 
   [[maybe_unused]]
   const size_t      nThreads = NamedParameter<size_t>     ("nCores"    , 8           , "Number of threads to use" );
-<<<<<<< HEAD
-   size_t           fPDF     = NamedParameter<size_t>     ("fPDF", 1, "fraction of signal events");
-   size_t           fComb     = NamedParameter<size_t>     ("fComb", 0, "fraction of combinatoric events");
-   size_t           fMisID     = NamedParameter<size_t>     ("fMisID", 0, "fraction of signal events");
-=======
-
->>>>>>> 650cd2bd7e79e215b47a4fdb10a9e2a38bdd03b4
   const size_t      NBins    = NamedParameter<size_t>     ("nBins"     , 100         , "Number of bins used for plotting.");
   const bool        perturb  = NamedParameter<bool>       ("Perturb"   , 0           , "Flag to randomise starting parameters.");
   const size_t      seed     = NamedParameter<size_t>     ("Seed"      , 0           , "Random seed used" );

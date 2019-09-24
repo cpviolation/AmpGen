@@ -51,7 +51,7 @@ bool MinuitParameterSet::addToEnd( MinuitParameter* parPtr )
   return success;
 }
 
-MinuitParameter* MinuitParameterSet::add( const std::string& name, const unsigned int& flag, const double& mean,
+MinuitParameter* MinuitParameterSet::add( const std::string& name, const Flag& flag, const double& mean,
     const double& sigma, const double& min, const double& max )
 {
   addToEnd( new MinuitParameter( name, Flag(flag), mean, sigma, min, max ) );
@@ -136,7 +136,7 @@ void MinuitParameterSet::tryParameter( const std::vector<std::string>& line )
     if( !status ) return; 
     auto   flag = parse<Flag>( line[1] );
     if ( OptionsParser::printHelp() )
-      INFO( "MINUIT: Registered " << line[0] << " (flag " << flag << ") = " << mean << ", step=" << step << " ("<< min << "," << max << ")" );
+      INFO( "MINUIT: Registered " << line[0] << " ( " << to_string<Flag>(flag) << ") = " << mean << ", step=" << step << " ("<< min << "," << max << ")" );
     add( new MinuitParameter( line[0], flag, mean, step, min, max ) ); 
   }
   if ( line.size() == 7 || line.size() == 11 ) {
@@ -151,11 +151,11 @@ void MinuitParameterSet::tryParameter( const std::vector<std::string>& line )
     double max_im  = hasLimits ? lexical_cast<double>( line[10], status ) : 0;
 
     if ( !status ) return;
-    auto   flag_re = parse<Flag>(line[1]);
-    auto   flag_im = parse<Flag>(line[4 + 2*hasLimits]);
+    auto flag_re = parse<Flag>(line[1]);
+    auto flag_im = parse<Flag>(line[4 + 2*hasLimits]);
     if ( OptionsParser::printHelp() ) {
-      INFO( "MINUIT: Complex " << line[0] << "_Re (flag " << flag_re << ") = " << mean_re << ", step=" << step_re << " (" << min_re << "," << max_re << ")" );
-      INFO( "MINUIT: Complex " << line[0] << "_Im (flag " << flag_im << ") = " << mean_im << ", step=" << step_im << " (" << min_im << "," << max_im << ")" );
+      INFO( "MINUIT: Complex " << line[0] << "_Re ( " << to_string<Flag>(flag_re) << ") = " << mean_re << ", step=" << step_re << " (" << min_re << "," << max_re << ")" );
+      INFO( "MINUIT: Complex " << line[0] << "_Im ( " << to_string<Flag>(flag_im) << ") = " << mean_im << ", step=" << step_im << " (" << min_im << "," << max_im << ")" );
     }
     add( new MinuitParameter( line[0] + "_Re", flag_re, mean_re, step_re, min_re, max_re ) );
     add( new MinuitParameter( line[0] + "_Im", flag_im, mean_im, step_im, min_im, max_im ) );
@@ -225,7 +225,7 @@ void MinuitParameterSet::rename(const std::string& name, const std::string& new_
   m_keyAccess.emplace(new_name, it);
 }
 
-MinuitParameter* MinuitParameterSet::addOrGet( const std::string& name, const unsigned int& flag, const double& mean,
+MinuitParameter* MinuitParameterSet::addOrGet( const std::string& name, const Flag& flag, const double& mean,
     const double& sigma, const double& min, const double& max )
 {
   if ( m_keyAccess.count( name ) != 0 ) return m_keyAccess[name];

@@ -32,7 +32,7 @@ namespace AmpGen
   {
   private:
   template <typename T>
-  struct Has
+  struct HasGetVal
   {
     typedef char YesType[1];
     typedef char NoType[2]; 
@@ -41,14 +41,12 @@ namespace AmpGen
     enum { value = sizeof(test<T>(0)) == sizeof(YesType) };
   };
   
-
-
   public:
-    template <typename TYPE> typename std::enable_if_t<Has<TYPE>::value, void> setFunction( TYPE& fcn )
+    template <typename TYPE> typename std::enable_if_t<HasGetVal<TYPE>::value, void> setFunction( TYPE& fcn )
     {
       m_theFunction = [&fcn]() { return fcn.getVal(); };
     }
-    template <typename TYPE> typename std::enable_if_t<!Has<TYPE>::value, void> setFunction(TYPE& fcn)
+    template <typename TYPE> typename std::enable_if_t<!HasGetVal<TYPE>::value, void> setFunction(TYPE& fcn)
     {
       m_theFunction = [&fcn](){ return fcn() ; } ;
     }
@@ -93,7 +91,6 @@ namespace AmpGen
     std::vector<unsigned int>   m_mapping      = {};
     int          m_status     = {0};
     unsigned int m_nParams    = {0};
-    unsigned int m_lastPrint  = {0};
     unsigned int m_printLevel = {0};
     double       m_ll_zero    = {0};
     bool         m_normalise  = {false};
